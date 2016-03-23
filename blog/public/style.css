@@ -1,0 +1,31 @@
+
+.form-signin {
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+.userName{
+	margin-top: -15px;
+	margin-left: 33px;
+}
+.viewUser{
+	margin-top: -138px;
+	margin-left: 120px;
+}
+.avatar_home{
+	margin-left: 8px;
+}
+.avatar_alt_home{
+
+}
+.avatar_menu{
+	margin-left: 65px;
+	margin-top: -38px;
+}
+.avatar_search{
+	margin-top: -37px;
+	margin-left: 70px;
+}
+.recent-reply{
+	width: 30px !important; 
+}
