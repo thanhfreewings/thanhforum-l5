@@ -14,8 +14,8 @@
 				@foreach ($threads as $key => $thread)
 					<li>
 						<div class="media">
-							<img src="{{$thread->getUser()->avatar}}">
-							<a href="/user/view/{{$thread->getUser()->id}}"><h6><?php echo $thread->getUser()->name ?></h6></a>
+							<img src="/{{$thread->getUser()->avatar}}">
+							<a href="/user/view/{{$thread->getUser()->id}}"><h6>{{ $thread->getUser()->name }}</h6></a>
 						</div>
 						<div class="info-container">
 
@@ -40,10 +40,10 @@
 							<div class="latest-post">
 								<p class="time">created at {{$thread->created_at}}</p></br>
 								<ul class="list-inline">
-									@foreach ($thread->getRecentUserReplies() as $key => $user)
+									@foreach ($thread->getComments() as $key => $user)
 										<li>
 											<div class="media recent-reply">
-												<img src="<?php echo $user->avatar?>">
+												<a href="/user/view/{{$user->getUser()->id}}"><img src="/{{ $user->getUser()->avatar}}"></a>
 											</div>
 										</li>
 									@endforeach

@@ -44,20 +44,34 @@
 							</div>
 						</form>
 					</li>
-					<li><a href="/message">Inbox</a></li>
-					<li><a href="/sent">Sent</a></li>
+					<li><a href="/message/inbox"><span class="badge badge-danger pull-right">{{ \App\Models\Message::countInbox() }}</span>Inbox</a></li>
+					<li><a href="/message/sent">Sent</a></li>
 					<li><a href="/message/create">Message</a></li>
 					<li><a href="/thread/create">Compose</a></li>
-					<li><a href="/logout">Hi {{\Auth::user()->name}}, Logout</a></li>
+					</li>
+					<li class="dropdown navbar-user">
+						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+							<img src="/{{\Auth::user()->avatar}}" class="img-circle" width="25" height="25" />
+							<span class="hidden-xs">Hi {{\Auth::user()->name}}</span> <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu animated fadeInLeft">
+							<li class="arrow"></li>
+							<li><a href="">Edit Profile</a></li>
+							<li><a href="">Thread</a></li>
+							<li class="divider"></li>
+							<li><a href="/logout">Log Out</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
+	<div class="content">
 	<div class="container">
 		@yield('content')
 	</div>
-
+	</div>
 	<script src="assets/plugins/pace/pace.min.js"></script>
 
 	<script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>

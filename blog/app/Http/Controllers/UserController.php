@@ -13,12 +13,28 @@ class UserController extends Controller
         $users = User::all();
         return \View::make('user.index',compact('users'));
     }
-    public function create()
+/*    public function create()
     {
         return \View::make('user.create');
-    }
-    public function view($id){
+    }*/
+    public function view($id)
+    {
         $user = User::find($id);
         return \View::make('user.view',compact('user'));
+    }
+    public function upload()
+    {
+        return \View::make('user.upload');
+    }
+    public function postUpload()
+    {
+        $file = \Input::file('avatar');
+        $name = time().'_'. $file->getClientOriginalName();
+        $file->move('uploads',$name);
+
+        $user = \Auth::user();
+        $user->avatar ='uploads/'.$name;
+        $user->save();
+        return redirect('/');
     }
 }

@@ -4,7 +4,8 @@
 <title>View thread</title>
 <div class="content">
 	<div class="container">
-		<img src="<?php echo $user->avatar ?>" class="img-circle" alt="avatar" height="85" width="85">
+		<div class="col-xs-12 col-sm-9">
+		<img src="/{{ $user->avatar }}" >
 		<div class="viewUser">
 			<br><br>
 			<h3>User name: <?php echo $user->name ?></h3>
@@ -13,7 +14,6 @@
 			<p>Email: <?php echo $user->email ?></p>
 		</div>
 		<hr style="border-width: 2px;">
-		<div class="col-xs-12 col-sm-9">
 			
 			@if(!empty($user->getThreads()))
 				@foreach ($user->getThreads() as $thread)

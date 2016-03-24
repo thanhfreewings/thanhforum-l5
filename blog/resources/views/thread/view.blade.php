@@ -7,20 +7,20 @@
 		<div class="col-md-9">
 			<ul class="forum-list forum-detail-list">
 				<li>
-				<div class="media">
-					<img src="{{ $thread->getUser()->avatar }}" >
-					<span class="label label-inverse">{{ $thread->getUser()->name }}</span>
-				</div>
-				<div class="info-container">
-					<div class="post-user"><a href="/view_user.php?id=<?php echo $thread->created_by ?>">{{ $thread->getUser()->name }}</a><small><?php echo $thread->title ?></small></div>
-					<div class="post-content">
-						{{ $thread->content }}
+					<div class="media">
+						<img src="/{{ $thread->getUser()->avatar }}" >
+						<span class="label label-inverse">{{ $thread->getUser()->name }}</span>
 					</div>
-					<div class="post-time">
-						at {{ $thread->created_at }}
-						<?php if(!empty($thread->updated_at)){ echo 'update at '.$thread->updated_at; } ?>
+					<div class="info-container">
+						<div class="post-user"><a href="/view_user.php?id=<?php echo $thread->created_by ?>">{{ $thread->getUser()->name }}</a><small><?php echo $thread->title ?></small></div>
+						<div class="post-content">
+							{{ $thread->content }}
+						</div>
+						<div class="post-time">
+							at {{ $thread->created_at }}
+							<?php if(!empty($thread->updated_at)){ echo 'update at '.$thread->updated_at; } ?>
+						</div>
 					</div>
-				</div>
 				</li>
 			</ul>
 			<ul class="forum-list forum-detail-list">
@@ -47,7 +47,7 @@
 				@foreach ($thread->getComments() as $key => $comment)
 					<li>
 						<div class="media">
-							<img src="{{$comment->getUser()->avatar}}" >
+							<img src="/{{$comment->getUser()->avatar}}" >
 							<span class="label label-inverse">{{$comment->getUser()->name}}</span>
 						</div>
 						<div class="info-container">

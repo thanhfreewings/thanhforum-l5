@@ -28,9 +28,18 @@ Route::group(['middleware' => ['web','auth']], function () {
 	Route::get('/home', 'ThreadController@index');
 	Route::get('/user/create', 'UserController@create');
 	Route::get('/user/view/{id}', 'UserController@view');
+	Route::get('/user/upload', 'UserController@upload');
+	Route::post('/user/upload', 'UserController@postUpload');
 	Route::get('/thread', 'ThreadController@index');
+	Route::get('/thread/create', 'ThreadController@getCreate');
+	Route::post('/thread/create', 'ThreadController@postCreate');
 	Route::get('/thread/view/{id}', 'ThreadController@view');
-	Route::get('/message', 'MessageController@index');
+	Route::get('/message/inbox', 'MessageController@inbox');
+	Route::get('/message/sent', 'MessageController@sent');
+	Route::get('/message/create', 'MessageController@getCreate');
+	Route::post('/message/create', 'MessageController@postCreate');
+	Route::get('/message/reply/{id}', 'MessageController@getReply');
+	Route::post('/message/reply/{id}', 'MessageController@postCreate');
 });
 
 Route::group(['middleware' => 'web'], function () {

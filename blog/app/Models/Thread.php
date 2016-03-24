@@ -14,7 +14,8 @@ class Thread extends Model
     }
     public function getComments(){
         $result = Comment::where('thread_id', '=',$this->id)
-                       ->get();
+                        ->orderBy('id', 'desc')
+                        ->get();
         return $result;
     }
     public function countComment(){
@@ -22,9 +23,5 @@ class Thread extends Model
                        ->count();
         return $count;
     }
-    public function getRecentUserReplies(){
-        $result = User::where('id', '=',$this->id)
-                       ->get();
-        return $result;
-    }
+
 }

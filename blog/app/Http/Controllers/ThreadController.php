@@ -10,12 +10,28 @@ class ThreadController extends Controller
     
     public function index()
     {
-        $threads = Thread::all();
+        $threads = Thread::orderBy('id', 'desc')
+					->get();
         return \View::make('thread.index',compact('threads'));
     }
 
     public function view($id){
         $thread = Thread::find($id);
         return \View::make('thread.view',compact('thread'));
+    }
+
+    public function getCreate(){
+    	return \View::make('thread.create');
+    }
+
+    public function postCreate(){
+    	$inputs = \Input::all();
+    	$thread = new Thread();
+    	$thread->title = $inputs['title'];
+    	$thread->content = $inputs['content'];
+    	$thread->created_at = time();
+    	$thread->created_by = \Auth::user()->id;
+		$thread->save();
+		return redirect('/');
     }
 }
