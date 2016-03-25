@@ -42,4 +42,12 @@ class MessageController extends Controller
 		$getUser = User::find($id);
 		return \View::make('message.reply',compact('getUser'));
 	}
+	public function inboxDelete($id){
+		Message::where('id', '=', $id)->delete();
+		return redirect('/message/inbox');
+	}
+	public function sentDelete($id){
+		Message::where('id', '=', $id)->delete();
+		return redirect('/message/sent');
+	}
 }

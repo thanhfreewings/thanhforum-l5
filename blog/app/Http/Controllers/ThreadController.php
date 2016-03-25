@@ -34,4 +34,9 @@ class ThreadController extends Controller
 		$thread->save();
 		return redirect('/');
     }
+    public function created(){
+    	$threads = Thread::where('created_by', '=', \Auth::user()->id)
+    					->get();
+    	return \View::make('thread.created',compact('threads'));
+    }
 }

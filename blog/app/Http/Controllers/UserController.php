@@ -17,6 +17,11 @@ class UserController extends Controller
     {
         return \View::make('user.create');
     }*/
+    public function getEdit()
+    {
+        $user = User::where('id', '=', \Auth::user()->id);
+        return \View::make('user.edit',compact('user'));
+    }
     public function view($id)
     {
         $user = User::find($id);

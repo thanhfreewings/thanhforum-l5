@@ -23,7 +23,7 @@
 							</td>
 							<td>{{ $message->message }}</td>	
 							<td class="email-subject">
-								<a href="/message/delete/{{ $message->id }}" class="email-btn" data-click="email-remove"><i class="fa fa-trash-o"></i></a>
+								<a href="/message/sent/delete/{{ $message->id }}" class="email-btn" data-click="email-remove"><i class="fa fa-trash-o"></i></a>
 							</td>
 						</tr>
 					@endforeach

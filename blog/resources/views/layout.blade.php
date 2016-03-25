@@ -15,8 +15,8 @@
 	<link href="/assets/css/style.min.css" rel="stylesheet" />
 	<link href="/assets/css/style-responsive.min.css" rel="stylesheet" />
 	<link href="/assets/css/theme/default.css" id="theme" rel="stylesheet" />
+	<link href="/css/app.css" rel="stylesheet" />
 
-	<link type='text/css' rel='stylesheet' href='style.css'/> 
 </head>
 <body>
 	<div id="header" class="header navbar navbar-default navbar-fixed-top">
@@ -27,7 +27,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="/home" class="navbar-brand">
+				<a href="/" class="navbar-brand">
 					<span class="navbar-logo"></span>
 					<span class="brand-text">
 						Thanh Forum
@@ -50,14 +50,14 @@
 					<li><a href="/thread/create">Compose</a></li>
 					</li>
 					<li class="dropdown navbar-user">
-						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+						<a href="/javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 							<img src="/{{\Auth::user()->avatar}}" class="img-circle" width="25" height="25" />
 							<span class="hidden-xs">Hi {{\Auth::user()->name}}</span> <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu animated fadeInLeft">
 							<li class="arrow"></li>
-							<li><a href="">Edit Profile</a></li>
-							<li><a href="">Thread</a></li>
+							<li><a href="/user/edit">Edit Profile</a></li>
+							<li><a href="/thread/created">Thread</a></li>
 							<li class="divider"></li>
 							<li><a href="/logout">Log Out</a></li>
 						</ul>
@@ -68,17 +68,16 @@
 	</div>
 
 	<div class="content">
-	<div class="container">
-		@yield('content')
+		<div class="container">
+			@yield('content')
+		</div>
 	</div>
-	</div>
-	<script src="assets/plugins/pace/pace.min.js"></script>
-
-	<script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
-	<script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
-	<script src="assets/js/apps.min.js"></script>
+	<script src="/assets/plugins/pace/pace.min.js"></script>
+	<script src="/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+	<script src="/assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+	<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+	<script src="/assets/js/apps.min.js"></script>
 
 	<script>    
 		$(document).ready(function() {

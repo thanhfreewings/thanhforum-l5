@@ -22,7 +22,7 @@
 								<a href="/user/view/{{ $message->created_by }}">{{ $message->getSender()->name }}</a>
 							</td>
 							<td class="email-subject">
-								<a href="/message/delete/{{ $message->id }}" class="email-btn" data-click="email-remove"><i class="fa fa-trash-o"></i></a>
+								<a href="/message/inbox/delete/{{ $message->id }}" class="email-btn" data-click="email-remove"><i class="fa fa-trash-o"></i></a>
 							</td>
 							<td>{{ $message->message }}</td>	
 							<td class="email-date"><a href="/message/reply/{{ $message->created_by }}">reply</a></td>
@@ -32,6 +32,9 @@
 				@if(empty($messages))
 					<tr>
 						<td><p>Inbox is empty...!</p></td>
+						<td></td>
+						<td></td>
+						<td></td>
 					</tr>
 				@endif
 			</tbody>
