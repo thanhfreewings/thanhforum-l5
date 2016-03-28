@@ -37,7 +37,8 @@
 			<div class="collapse navbar-collapse" id="header-navbar">
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<form class="navbar-form" method="POST" action="/result_search.php">
+						<form class="navbar-form" method="POST" action="/user/search">
+							<input type="hidden" name="_token" value="{{csrf_token()}}"></input>
 							<div class="form-group">
 								<input type="text" name="name" class="form-control" placeholder="Enter Name..." />
 								<button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>

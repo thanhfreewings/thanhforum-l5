@@ -43,7 +43,7 @@
 									@foreach ($thread->getComments() as $key => $user)
 										<li>
 											<div class="media recent-reply">
-												<a href="/user/view/{{$user->getUser()->id}}"><img src="/{{ $user->getUser()->avatar}}"></a>
+												<a href="/user/view/{{$user->filterUser()->id}}"><img src="/{{ $user->filterUser()->avatar}}" width="25" height="25"></a>
 											</div>
 										</li>
 									@endforeach

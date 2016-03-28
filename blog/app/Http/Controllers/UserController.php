@@ -17,10 +17,32 @@ class UserController extends Controller
     {
         return \View::make('user.create');
     }*/
-    public function getEdit()
+    public function edit()
     {
-        $user = User::where('id', '=', \Auth::user()->id);
+        $user = User::where('id', '=', \Auth::user()->id)
+                    ->get();
         return \View::make('user.edit',compact('user'));
+    }
+    public function postSearch()
+    {
+        $inputs = \Input::all();
+        $users = User::where('name', '=', $inputs['name'])
+                    ->get();
+        return \View::make('user.search',compact('users'));
+    }
+    public function getUpdate()
+    {
+        return \View::make('user.update');
+    }
+    public function postUpdate()
+    {
+        $inputs = \Input::all();
+        $user = \Auth::user();
+        $user->name = $inputs['name'];
+        $user->email = $inputs['email'];
+        $user->password = $inputs['password'];
+        $user->save();
+        return redirect('/user/edit');
     }
     public function view($id)
     {
