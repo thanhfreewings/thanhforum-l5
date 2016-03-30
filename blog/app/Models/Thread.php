@@ -14,12 +14,17 @@ class Thread extends Model
     }
     public function filterUser(){
         $result = array();
-        $users = User::find($this->created_by);
+        $users = array();
+        
+        $comments = $this->getComments();
+        foreach ($comments as $comment) {
+            $users[] = $comment->getUser();
+        }
+
         foreach ($users as $user){
-            $new = $user;
             $found = false;
             foreach ($result as $value) {
-                if($value->id == $new->id){
+                if($value->id == $user->id){
                     $found = true;
                     break;
                 }

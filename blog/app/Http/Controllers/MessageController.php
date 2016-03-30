@@ -31,6 +31,15 @@ class MessageController extends Controller
 	}
 	public function postCreate(){
 		$inputs = \Input::all();
+        $rules = array(
+                        'message'      =>'required|min:4|max:100'
+                    );
+
+        $validator = \Validator::make(\Input::all(),$rules);
+
+        if($validator->fails()){
+            return redirect('/message/create')->withErrors($validator)->withInput();
+        }
 		$message = new Message();
 		$message->message = $inputs['message'];
 		$message->receiver_id = $inputs['receiver_id'];
@@ -41,6 +50,25 @@ class MessageController extends Controller
 	public function getReply($id){
 		$getUser = User::find($id);
 		return \View::make('message.reply',compact('getUser'));
+	}
+	public function postReply(){
+		$inputs = \Input::all();
+        $rules = array(
+                        'message'      =>'required|min:4|max:100'
+                    );
+
+        $validator = \Validator::make(\Input::all(),$rules);
+
+        if($validator->fails()){
+            return \Redirect::back()->withErrors($validator)->withInput();
+            //return redirect('/message/reply/'.$inputs['receiver_id'])->withErrors($validator)->withInput();
+        }
+		$message = new Message();
+		$message->message = $inputs['message'];
+		$message->receiver_id = $inputs['receiver_id'];
+		$message->created_by = \Auth::user()->id;
+		$message->save();
+		return redirect('/message/sent');
 	}
 	public function inboxDelete($id){
 		Message::where('id', '=', $id)->delete();

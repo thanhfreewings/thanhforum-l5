@@ -39,11 +39,12 @@
 							</div>
 							<div class="latest-post">
 								<p class="time">created at {{$thread->created_at}}</p></br>
+								<h4>Recent replies</h4>
 								<ul class="list-inline">
-									@foreach ($thread->getComments() as $key => $user)
+									@foreach ($thread->filterUser() as $user)
 										<li>
 											<div class="media recent-reply">
-												<a href="/user/view/{{$user->filterUser()->id}}"><img src="/{{ $user->filterUser()->avatar}}" width="25" height="25"></a>
+												<a href="/user/view/{{$user->id}}"><img src="/{{ $user->avatar}}" width="30" height="30"></a>
 											</div>
 										</li>
 									@endforeach

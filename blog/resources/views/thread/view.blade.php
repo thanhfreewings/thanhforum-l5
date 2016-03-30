@@ -31,8 +31,12 @@
 								<h4 class="panel-title">Comment</h4>
 							</div>
 							<div class="panel-body">
-								<form action="add_comment.php" name="wysihtml5" method="POST">
-									<input type="hidden" name="thread_id" value="<?php echo $thread->id ?>">
+								<form method="POST" action="/comment/create">
+									<input type="hidden" name="_token" value="{{csrf_token()}}"></input>
+									<input type="hidden" name="thread_id" value="{{ $thread->id }}">
+									@if($errors->has('content'))
+									<span class="text-danger">{{$errors->first('content')}}</span>
+									@endif
 									<textarea class="textarea form-control" name="content" placeholder="Enter text ..." rows="10"></textarea>
 									<div class="m-t-10">
 										<button type="submit" class="btn btn-theme">Post Comment <i class="fa fa-paper-plane"></i></button>

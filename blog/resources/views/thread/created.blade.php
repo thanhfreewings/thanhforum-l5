@@ -21,6 +21,24 @@
 			@else
 				<h2>do not have a thread...</h2>
 			@endif
+
+
+            <div class="post-info">
+                <h4 class="post-title">
+                    <a href="post_detail.html">Bootstrap Carousel Blog Post</a>
+                </h4>
+                <div class="post-by">
+                    Posted By <a href="#">admin</a> <span class="divider">|</span> <a href="#">Sports</a>, <a href="#">Mountain</a>, <a href="#">Bike</a> <span class="divider">|</span> 2 Comments
+                </div>
+                <div class="post-desc">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elit dolor, elementum ut ligula ultricies, 
+                    aliquet eleifend risus. Vivamus ut auctor sapien. Morbi at nibh id lorem viverra commodo augue dui, in pellentesque odio tempor.
+                     Etiam lobortis vel enim vitae facilisis. Suspendisse ac faucibus diam, non malesuada nisl. Maecenas vel aliquam eros, sit amet gravida lacus. 
+                     nteger dictum, nulla [...]
+                </div>
+            </div>
+
+			
 		</div>
 	</div>
 </div>

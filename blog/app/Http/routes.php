@@ -28,16 +28,16 @@ Route::group(['middleware' => ['web','auth']], function () {
 	Route::get('/user/create', 'UserController@create');
 	Route::get('/user/view/{id}', 'UserController@view');
 	Route::get('/user/upload', 'UserController@upload');
-	Route::get('/user/edit', 'UserController@edit');
 	Route::post('/user/search', 'UserController@postSearch');
-	Route::get('/user/update', 'UserController@getUpdate');
-	Route::post('/user/update', 'UserController@postUpdate');
+	Route::get('/user/edit', 'UserController@getEdit');
+	Route::post('/user/edit', 'UserController@postEdit');
+	Route::get('/user/success', 'UserController@success');
 	Route::post('/user/upload', 'UserController@postUpload');
 	Route::get('/thread', 'ThreadController@index');
 	Route::get('/thread/create', 'ThreadController@getCreate');
 	Route::get('/thread/created', 'ThreadController@created');
 	Route::post('/thread/create', 'ThreadController@postCreate');
-	Route::get('/thread/view/{id}', 'ThreadController@view');
+	Route::get('/thread/view/{id}', 'ThreadController@getView');
 	Route::get('/message/inbox', 'MessageController@inbox');
 	Route::get('/message/inbox/delete/{id}', 'MessageController@inboxDelete');
 	Route::get('/message/sent', 'MessageController@sent');
@@ -45,7 +45,8 @@ Route::group(['middleware' => ['web','auth']], function () {
 	Route::get('/message/create', 'MessageController@getCreate');
 	Route::post('/message/create', 'MessageController@postCreate');
 	Route::get('/message/reply/{id}', 'MessageController@getReply');
-	Route::post('/message/reply/{id}', 'MessageController@postCreate');
+	Route::post('/message/reply/{id}', 'MessageController@postReply');
+	Route::post('/comment/create', 'CommentController@postCreate');
 });
 
 Route::group(['middleware' => 'web'], function () {

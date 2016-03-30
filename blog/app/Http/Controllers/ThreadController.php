@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Thread;
+use App\Models\Comment;
 
 class ThreadController extends Controller
 {
@@ -12,20 +13,51 @@ class ThreadController extends Controller
     {
         $threads = Thread::orderBy('id', 'desc')
 					->get();
+					/*var_dump($threads);
+					exit();*/
         return \View::make('thread.index',compact('threads'));
     }
 
-    public function view($id){
+    public function getView($id){
         $thread = Thread::find($id);
         return \View::make('thread.view',compact('thread'));
     }
+    public function postComment(){
+    	$inputs = \Input::all();
+        $rules = array(
+                        'content'  =>'required'
+                    );
 
+        $validator = \Validator::make(\Input::all(),$rules);
+
+        if($validator->fails()){
+            return \Redirect::back()->withErrors($validator)->withInput();
+        }
+
+    	$comment = new Comment();
+    	$comment->content = $inputs['content'];
+    	$comment->created_by = \Auth::user()->id;
+		$comment->save();
+		return redirect('/thread/view/'.$inputs['']);
+    }
     public function getCreate(){
     	return \View::make('thread.create');
     }
 
     public function postCreate(){
     	$inputs = \Input::all();
+
+        $rules = array(
+                        'title'    =>'required|min:4|max:50',
+                        'content'  =>'required'
+                    );
+
+        $validator = \Validator::make(\Input::all(),$rules);
+
+        if($validator->fails()){
+            return redirect('/thread/create')->withErrors($validator)->withInput();
+        }
+
     	$thread = new Thread();
     	$thread->title = $inputs['title'];
     	$thread->content = $inputs['content'];

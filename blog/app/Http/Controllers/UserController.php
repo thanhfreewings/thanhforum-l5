@@ -17,11 +17,37 @@ class UserController extends Controller
     {
         return \View::make('user.create');
     }*/
-    public function edit()
+    public function getEdit()
     {
         $user = User::where('id', '=', \Auth::user()->id)
-                    ->get();
+                    ->first();
         return \View::make('user.edit',compact('user'));
+    }
+    public function postEdit()
+    {
+        $inputs = \Input::all();
+        $rules = array(
+                        'name'      =>'required',
+                        'email'     =>'email|required',
+                        'password'  =>'required'
+                    );
+
+        $validator = \Validator::make(\Input::all(),$rules);
+
+        if($validator->fails()){
+            return redirect('/user/edit')->withErrors($validator)->withInput();
+        }
+
+        $user = \Auth::user();
+        $user->name = $inputs['name'];
+        $user->email = $inputs['email'];
+        $user->password = bcrypt($inputs['password']);
+        $user->save();
+        return redirect('/user/success');
+    }
+    public function success()
+    {
+        return \View::make('user.success');
     }
     public function postSearch()
     {
@@ -29,20 +55,6 @@ class UserController extends Controller
         $users = User::where('name', '=', $inputs['name'])
                     ->get();
         return \View::make('user.search',compact('users'));
-    }
-    public function getUpdate()
-    {
-        return \View::make('user.update');
-    }
-    public function postUpdate()
-    {
-        $inputs = \Input::all();
-        $user = \Auth::user();
-        $user->name = $inputs['name'];
-        $user->email = $inputs['email'];
-        $user->password = $inputs['password'];
-        $user->save();
-        return redirect('/user/edit');
     }
     public function view($id)
     {
@@ -56,12 +68,14 @@ class UserController extends Controller
     public function postUpload()
     {
         $file = \Input::file('avatar');
-        $name = time().'_'. $file->getClientOriginalName();
-        $file->move('uploads',$name);
+        if(!empty($file)){
+            $name = time().'_'. $file->getClientOriginalName();
+            $file->move('uploads',$name);
 
-        $user = \Auth::user();
-        $user->avatar ='uploads/'.$name;
-        $user->save();
+            $user = \Auth::user();
+            $user->avatar ='uploads/'.$name;
+            $user->save();
+        }
         return redirect('/');
     }
 }
