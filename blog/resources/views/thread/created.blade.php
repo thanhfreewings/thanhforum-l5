@@ -6,8 +6,7 @@
 	<div class="container">
 		<div class="col-xs-12 col-sm-9">
 			<br><br>
-			<h3>Thread created:</h3>
-			<hr style="border-width: 2px;">
+			<p class="text-right"><a href="/thread/create" class="btn btn-success m-r-5 m-b-5">+ Compose</a></p><hr>
 			@if(!empty($threads))
 				@foreach ($threads as $thread)
 					<h4><a href="/thread/view/{{$thread->id}}">{{$thread->title}}</a></h4>
@@ -16,7 +15,9 @@
 						@if(!empty($thread->updated_at))
 							|<span>updated {{$thread->updated_at}}</span>
 						@endif
-					</span>|<span>{{ $thread->countComment() }} Comments</span>
+					</span>|<span>{{ $thread->countComment() }} Comments</span>|
+					<span><a href="/thread/update/{{$thread->id}}">update</a></span>|
+					<span><a href="/thread/delete/{{$thread->id}}">delete</a></span>
 					<p>{{$thread->content}}[...]</p>
 					<br/>
 				@endforeach

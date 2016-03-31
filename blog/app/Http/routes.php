@@ -37,6 +37,9 @@ Route::group(['middleware' => ['web','auth']], function () {
 	Route::get('/thread/create', 'ThreadController@getCreate');
 	Route::get('/thread/created', 'ThreadController@created');
 	Route::post('/thread/create', 'ThreadController@postCreate');
+	Route::get('/thread/delete/{id}', 'ThreadController@delete');
+	Route::get('/thread/update/{id}', 'ThreadController@getUpdate');
+	Route::post('/thread/update/{id}', 'ThreadController@postUpdate');
 	Route::get('/thread/view/{id}', 'ThreadController@getView');
 	Route::get('/message/inbox', 'MessageController@inbox');
 	Route::get('/message/inbox/delete/{id}', 'MessageController@inboxDelete');

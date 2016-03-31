@@ -64,7 +64,6 @@ class ThreadController extends Controller
     	$thread = new Thread();
     	$thread->title = $inputs['title'];
     	$thread->content = $inputs['content'];
-    	$thread->created_at = time();
     	$thread->created_by = \Auth::user()->id;
 		$thread->save();
 		return redirect('/');
@@ -73,5 +72,31 @@ class ThreadController extends Controller
     	$threads = Thread::where('created_by', '=', \Auth::user()->id)
     					->get();
     	return \View::make('thread.created',compact('threads'));
+    }
+    public function getUpdate($id){
+    	$thread = Thread::find($id);
+    	return \View::make('thread.update',compact('thread'));
+    }
+    public function postUpdate($id){
+    	$inputs = \Input::all();
+    	$rules = array(
+    					'title'   => 'required|min:4|max:50',
+    					'content' => 'required',
+		    		);
+    	$validator = \Validator::make(\Input::all(),$rules);
+
+    	if($validator->fails()){
+    		return \Redirect::back()->withErrors($validator)->withInput();
+    	}
+
+    	$thread = Thread::find($id);
+    	$thread->title = $inputs['title'];
+    	$thread->content = $inputs['content'];
+    	$thread->save();
+    	return redirect('/thread/created');
+    }
+    public function delete($id){
+    	Thread::where('id', '=', $id)->delete();
+    	return redirect('/thread/created');
     }
 }

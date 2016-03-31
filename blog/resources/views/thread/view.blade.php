@@ -8,17 +8,20 @@
 			<ul class="forum-list forum-detail-list">
 				<li>
 					<div class="media">
-						<img src="/{{ $thread->getUser()->avatar }}" >
-						<span class="label label-inverse">{{ $thread->getUser()->name }}</span>
+						<a href="/user/view/{{$thread->getUser->id}}"><img src="/{{ $thread->getUser->avatar }}" ></a>
+						<span class="label label-inverse">{{ $thread->getUser->name }}</span>
 					</div>
 					<div class="info-container">
-						<div class="post-user"><a href="/view_user.php?id=<?php echo $thread->created_by ?>">{{ $thread->getUser()->name }}</a><small><?php echo $thread->title ?></small></div>
-						<div class="post-content">
-							{{ $thread->content }}
-						</div>
+						<div class="post-user"><small><?php echo $thread->title ?></small></div>
 						<div class="post-time">
-							at {{ $thread->created_at }}
-							<?php if(!empty($thread->updated_at)){ echo 'update at '.$thread->updated_at; } ?>
+							<span>Poster <a href="/user/view/{{$thread->getUser->id}}">{{ $thread->getUser->name }} </a></span>|
+							<span>at {{ $thread->created_at }}</span>
+							@if(!empty($thread->updated_at))
+								| <span>update at {{$thread->updated_at}}</span>
+							@endif
+						</div>
+						<div class="post-content">
+							<span>{{ $thread->content }}</span>
 						</div>
 					</div>
 				</li>
@@ -48,14 +51,14 @@
 				</li>
 			</ul>
 			<ul class="forum-list forum-detail-list">
-				@foreach ($thread->getComments() as $key => $comment)
+				@foreach ($thread->comments as $key => $comment)
 					<li>
 						<div class="media">
-							<img src="/{{$comment->getUser()->avatar}}" >
-							<span class="label label-inverse">{{$comment->getUser()->name}}</span>
+							<a href="/user/view/{{$comment->user->id}}"><img src="/{{$comment->user->avatar}}" ></a>
+							<span class="label label-inverse">{{$comment->user->name}}</span>
 						</div>
 						<div class="info-container">
-							<div class="post-user"><a href="/view_user.php?id=<?php echo $comment->created_by ?>">{{ $comment->getUser()->name }}</a><small>SAYS</small></div>
+							<div class="post-user"><a href="/user/view/{{$comment->user->id}}">{{ $comment->user->name }}</a><small>SAYS</small></div>
 							<div class="post-content">
 								{{$comment->content}}
 							</div>
