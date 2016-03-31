@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+<title>Create thread</title>
 <div class="col-md-9 col-lg-9">
 	<form class="form-horizontal" method="POST">
 		<input type="hidden" name="_token" value="{{csrf_token()}}"></input>
