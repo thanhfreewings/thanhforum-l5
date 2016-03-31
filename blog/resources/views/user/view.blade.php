@@ -14,8 +14,8 @@
 	        </li>
 		</ul>
 	</div>
-	@if(!empty($user->getThreads()))
-		@foreach ($user->getThreads() as $thread)
+	@if(!$user->threads->isEmpty())
+		@foreach ($user->threads as $thread)
 			<h4><a href="/thread/view/{{$thread->id}}">{{$thread->title}}</a></h4>
 			<p>Created at {{$thread->created_at}}
 			@if(!empty($thread->updated_at))
@@ -24,6 +24,7 @@
 			<p>{{$thread->content}}</p>
 		@endforeach
 	@else
-		<h2>do not have a thread...</h2>
-			@endif
+		<p>do not have a thread...</p>
+	@endif
+
 @endsection

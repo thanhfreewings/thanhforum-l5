@@ -5,6 +5,7 @@
 <div class="content">
 	<div class="container">
 		
+		<p class="text-right"><a href="/thread/create" class="btn btn-link">+ Compose</a></p>
 		<div class="panel panel-forum">
 			<div class="panel-heading">
 				<h4 class="panel-title">All thread</h4>
@@ -12,34 +13,32 @@
 			<ul class="forum-list">
 
 				@foreach ($threads as $key => $thread)
-					<li>
+					 <li>
 						<div class="media">
-							<img src="/{{$thread->getUser()->avatar}}">
-							<a href="/user/view/{{$thread->getUser()->id}}"><h6>{{ $thread->getUser()->name }}</h6></a>
+							<img src="/{{$thread->avatar}}">
+							<a href="/user/view/{{$thread->userId}}"><h6>{{ $thread->name }}</h6></a>
 						</div>
 						<div class="info-container">
 
 							<div class="info">
 								<h4 class="title"><a href="/thread/view/{{$thread->id}}">{{$thread->title}}</a></h4>
 								<p class="desc">
+									<span>Created {{$thread->created_at}}</span>
 									@if(!empty($thread->updated_at))
-										<p class="desc">(updated at {{ $thread->updated_at }} </p>
+										|<span class=""> updated {{ $thread->updated_at }}</span><br/>
 									@endif
-									<?php
-									echo substr($thread->content, 0,500);
-									if(strlen($thread->content) > 500){ echo '...'; }
-									echo '<br>';
-									?>
+									<span>{{substr($thread->content, 0,500)}}</span>
+									@if(strlen($thread->content) > 500)
+										<span>[...]</span>
+									@endif
+									<br>
 								</p>
 							</div>
 							<div class="total-count">
-								<td class="text-center"><div><i class="fa fa-2x fa-comments-o"></i></div><div class="hidden-xs">
-									{{$thread->countComment()}}.replies
-								</div></td>
+								<span class="text-center">{{$thread->countComment()}} Comments</span>
 							</div>
 							<div class="latest-post">
-								<p class="time">created at {{$thread->created_at}}</p></br>
-								<h4>Recent replies</h4>
+								<span>Recent replies</span>
 								<ul class="list-inline">
 									@foreach ($thread->filterUser() as $user)
 										<li>

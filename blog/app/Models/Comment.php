@@ -6,7 +6,7 @@ class Comment extends Model
 {
     protected $table = 'post';
     
-    public function getUser(){
-        return User::find($this->created_by);
+    public function user(){
+    	return $this->belongsTo('App\Models\User','created_by','id');
     }
 }
