@@ -7,14 +7,12 @@ class Message extends Model
 {
 	protected $table = 'message';
 
-	public function inbox(){
-		return Message::find($this->created_by);
-	}
-	public function getSender(){
-		return User::find($this->created_by);
+	public function getSender()
+	{
+		return $this->belongsTo('App\Models\User','created_by','id');
 	}
 	public function getReceiver(){
-		return User::find($this->receiver_id);
+		return $this->belongsTo('App\Models\User','receiver_id','id');
 	}
     public static function countInbox()
     {

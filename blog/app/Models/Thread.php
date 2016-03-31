@@ -9,16 +9,18 @@ class Thread extends Model
 {
     protected $table = 'thread';
 
-    public function getUser(){
-        return User::find($this->created_by);
+    public function comments(){
+        return $this->hasMany('App\Models\Comment','thread_id','id');
     }
+   
     public function filterUser(){
         $result = array();
         $users = array();
         
-        $comments = $this->getComments();
+        $comments = $this->comments;
+
         foreach ($comments as $comment) {
-            $users[] = $comment->getUser();
+            $users[] = $comment->user;
         }
 
         foreach ($users as $user){
@@ -35,16 +37,9 @@ class Thread extends Model
         }
         return $result;
     }
-    public function getComments(){
-        $result = Comment::where('thread_id', '=',$this->id)
-                        ->orderBy('id', 'desc')
-                        ->get();
-        return $result;
-    }
+    
     public function countComment(){
-        $count = Comment::where('thread_id', '=',$this->id)
-                       ->count();
-        return $count;
+        return count($this->comments);
     }
 
 }

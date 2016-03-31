@@ -17,9 +17,9 @@
 				@if(!empty($messages))
 					@foreach($messages as $message)
 						<tr>
-							<td><a href="/user/view/{{ $message->created_by }}"><img src="/{{ $message->getSender()->avatar }}" class="img-circle" height="25" width="25"></a></td>
+							<td><a href="/user/view/{{ $message->created_by }}"><img src="/{{ $message->getSender->avatar }}" class="img-circle" height="25" width="25"></a></td>
 							<td class="email-sender">
-								<a href="/user/view/{{ $message->created_by }}">{{ $message->getSender()->name }}</a>
+								<a href="/user/view/{{ $message->created_by }}">{{ $message->getSender->name }}</a>
 							</td>
 							<td class="email-subject">
 								<a href="/message/inbox/delete/{{ $message->id }}" class="email-btn" data-click="email-remove"><i class="fa fa-trash-o"></i></a>

@@ -11,10 +11,13 @@ class ThreadController extends Controller
     
     public function index()
     {
-        $threads = Thread::orderBy('id', 'desc')
+        $threads = Thread::join('user', 'thread.created_by', '=', 'user.id')
+        			->select('thread.*',
+        					 'user.id as userId',
+        					 'user.name',
+        					 'user.avatar')
+        			->orderBy('thread.id', 'desc')
 					->get();
-					/*var_dump($threads);
-					exit();*/
         return \View::make('thread.index',compact('threads'));
     }
 

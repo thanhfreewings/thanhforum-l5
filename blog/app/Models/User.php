@@ -25,14 +25,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    public function countThread(){
-        $count = Thread::where('created_by', '=',$this->id)
-                       ->count();
-        return $count;
+    public function threads(){
+        return $this->hasMany('App\Models\Thread','created_by','id');
     }
-    public function getThreads(){
-        $result = Thread::where('created_by', '=',$this->id)
-                       ->get();
-        return $result;
+    public function countThread(){
+        return count($this->threads);
     }
 }
+
