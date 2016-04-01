@@ -48,7 +48,6 @@ class ThreadController extends Controller
     }
 
     public function postCreate(){
-    	$inputs = \Input::all();
 
         $rules = array(
                         'title'    =>'required|min:4|max:50',
@@ -61,15 +60,23 @@ class ThreadController extends Controller
             return redirect('/thread/create')->withErrors($validator)->withInput();
         }
 
+    	$inputs = \Input::all();
     	$thread = new Thread();
     	$thread->title = $inputs['title'];
     	$thread->content = $inputs['content'];
     	$thread->created_by = \Auth::user()->id;
+    	$file = \Input::file('image');
+    	if(!empty($file)){
+    		$name = time().'_'.$file->getClientOriginalName();
+    		$file->move('uploads',$name);
+    		$thread->image = 'uploads/'.$name;
+    	}
 		$thread->save();
-		return redirect('/');
+		return redirect('/thread/created');
     }
     public function created(){
     	$threads = Thread::where('created_by', '=', \Auth::user()->id)
+    					->orderBy('id','desc')
     					->get();
     	return \View::make('thread.created',compact('threads'));
     }
@@ -92,6 +99,12 @@ class ThreadController extends Controller
     	$thread = Thread::find($id);
     	$thread->title = $inputs['title'];
     	$thread->content = $inputs['content'];
+    	$file = \Input::file('image');
+    	if(!empty($file)){
+    		$name = time().'_'.$file->getClientOriginalName();
+    		$file->move('uploads',$name);
+    		$thread->image = 'uploads/'.$name;
+    	}
     	$thread->save();
     	return redirect('/thread/created');
     }

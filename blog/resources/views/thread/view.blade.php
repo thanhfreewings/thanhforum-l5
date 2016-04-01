@@ -4,7 +4,7 @@
 <title>View thread</title>
 <div class="content">
 	<div class="container">
-		<div class="col-md-9">
+		<div class="col-md-11">
 			<ul class="forum-list forum-detail-list">
 				<li>
 					<div class="media">
@@ -13,6 +13,9 @@
 					</div>
 					<div class="info-container">
 						<div class="post-user"><small><?php echo $thread->title ?></small></div>
+						@if(!empty($thread->image))
+							<img src="/{{ $thread->image }}" class="img-responsive"><br/><br/>
+						@endif
 						<div class="post-time">
 							<span>Poster <a href="/user/view/{{$thread->getUser->id}}">{{ $thread->getUser->name }} </a></span>|
 							<span>at {{ $thread->created_at }}</span>
@@ -20,9 +23,7 @@
 								| <span>update at {{$thread->updated_at}}</span>
 							@endif
 						</div>
-						<div class="post-content">
-							<span>{{ $thread->content }}</span>
-						</div>
+						<div class="post-content">{{ $thread->content }}</div>
 					</div>
 				</li>
 			</ul>

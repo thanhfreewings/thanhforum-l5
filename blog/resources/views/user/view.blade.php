@@ -5,7 +5,7 @@
 	<div class="" lass="wrapper">
 	    <ul class="media-list underline m-b-20 p-b-15">
 	        <li class="media media-sm clearfix">
-	            <img class="media-object" src="/{{ $user->avatar }}" /><br/>
+	            <img class="media-object img-thumbnail" src="/{{ $user->avatar }}" /><br/>
 	            <div class="media-body">
 	                <span class="email-to">user name: {{ $user->name }}</span><br/>
 	                <span class="email-to">email: {{ $user->email }}</span><br/>
@@ -16,12 +16,18 @@
 	</div>
 	@if(!$user->threads->isEmpty())
 		@foreach ($user->threads as $thread)
-			<h4><a href="/thread/view/{{$thread->id}}">{{$thread->title}}</a></h4>
-			<p>Created at {{$thread->created_at}}
-			@if(!empty($thread->updated_at))
-				<p>update at {{$thread->updated_at}}</p>
+			<h4><a href="/thread/view/{{$thread->id}}">{{$thread->title}}</a></h4><br/>
+			@if(!empty($thread->image))
+				<img src="/{{ $thread->image }}" class="img-responsive"><br/><br/>
 			@endif
-			<p>{{$thread->content}}</p>
+			<span>At {{$thread->created_at}}</span>
+			<span>
+				@if(!empty($thread->updated_at))
+					|<span>updated {{$thread->updated_at}}</span>
+				@endif
+			</span>|<span>{{ $thread->countComment() }} Comments</span>
+			<p>{{$thread->content}}[...]</p><br/>
+			<a href="/thread/view/{{$thread->id}}" class="read-btn"><p class="text-right">Read More <i class="fa fa-angle-double-right"></i></p></a><br/>
 		@endforeach
 	@else
 		<p>do not have a thread...</p>

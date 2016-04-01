@@ -1,4 +1,7 @@
-.small-avatar{
-	height: 70px;
-	width: 70px;
+img.small-avatar{
+	height: 30px;
+	width: 30px;
+}
+a.other-link{
+	color: gray;
 }

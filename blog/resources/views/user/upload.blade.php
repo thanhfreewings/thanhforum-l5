@@ -9,7 +9,7 @@
 			<input type="hidden" name="_token" value="{{csrf_token()}}"></input>
 		    Select image to upload:
 		    <input type="file" name="avatar" id="fileToUpload"><br>
-		    <button type="submit" class="btn btn-default">Upload</button>
+		    <button type="submit" class="btn btn-success">Upload</button>
 		</form>
 		<br><hr style="border-width: 2px;">
 	</div>

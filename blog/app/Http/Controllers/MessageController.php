@@ -49,7 +49,8 @@ class MessageController extends Controller
 	}
 	public function getReply($id){
 		$getUser = User::find($id);
-		return \View::make('message.reply',compact('getUser'));
+		$allUsers = User::all();
+		return \View::make('message.reply',compact('getUser','allUsers'));
 	}
 	public function postReply(){
 		$inputs = \Input::all();

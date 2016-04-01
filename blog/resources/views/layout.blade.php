@@ -57,7 +57,7 @@
 						<ul class="dropdown-menu animated fadeInLeft">
 							<li class="arrow"></li>
 							<li><a href="/user/edit">Edit Profile</a></li>
-							<li><a href="/thread/created">Thread</a></li>
+							<li><a href="/thread/created">Thread created</a></li>
 							<li class="divider"></li>
 							<li><a href="/logout">Log Out</a></li>
 						</ul>
