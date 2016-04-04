@@ -24,18 +24,23 @@
         </ul>
     </div>
 	<div class="col-sm-9" >
+	@if(!empty($messages))
+		@foreach($messages as $message)
+			<img src="/{{$message->getSender->avatar}}" class="small-avatar img-circle">
+			<br/><p>{{$message->message}}</p><br/>
+			<small>{{$message->created_at}}</small>
+		@endforeach
+	@endif
 		<form class="form-horizontal" method="POST">
 			<input type="hidden" name="_token" value="{{csrf_token()}}"></input><br/>
 			<input type="hidden" name="receiver_id" value="{{ $getUser->id }}" >
 			<div class="form-group">
-				<div class="col-sm-10">
-					<h5 for="inputEmail3" class="">Message to: <a href="/user/view/{{$getUser->id}}">{{$getUser->name}}</a></h5>
-					@if($errors->has('message'))
-					<label class="text-danger">{{$errors->first('message')}}</label><br/>
-					@endif
-					<textarea name="message" class="form-control" rows="5">{{old('message')}}</textarea><br/>
-					<button type="submit" class="btn btn-success">Send message</button>
-				</div>
+				<h5 for="inputEmail3" class="">Message to: <a href="/user/view/{{$getUser->id}}">{{$getUser->name}}</a></h5>
+				@if($errors->has('message'))
+				<label class="text-danger">{{$errors->first('message')}}</label><br/>
+				@endif
+				<textarea name="message" class="form-control" rows="5">{{old('message')}}</textarea><br/>
+				<button type="submit" class="btn btn-success">Send message</button>
 			</div>
 		</form>
 	</div>

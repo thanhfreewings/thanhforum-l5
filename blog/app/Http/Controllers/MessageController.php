@@ -48,9 +48,19 @@ class MessageController extends Controller
 		return redirect('/message/sent');
 	}
 	public function getReply($id){
+		$me = \Auth::user();
 		$getUser = User::find($id);
 		$allUsers = User::all();
-		return \View::make('message.reply',compact('getUser','allUsers'));
+
+		$to_me = ['receiver_id' => $me->id, 'created_by' => $id];
+		$from_me = ['receiver_id' => $id, 'created_by' => $me->id];
+
+
+		$messages = Message::where($to_me)
+							->orWhere($from_me)
+							->orderBy('created_at', 'asc')
+							->get();
+		return \View::make('message.reply',compact('getUser','allUsers','messages'));
 	}
 	public function postReply(){
 		$inputs = \Input::all();
