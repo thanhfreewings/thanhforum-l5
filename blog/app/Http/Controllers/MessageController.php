@@ -79,7 +79,7 @@ class MessageController extends Controller
 		$message->receiver_id = $inputs['receiver_id'];
 		$message->created_by = \Auth::user()->id;
 		$message->save();
-		return redirect('/message/sent');
+		return \Redirect::back();
 	}
 	public function inboxDelete($id){
 		Message::where('id', '=', $id)->delete();
