@@ -38,8 +38,7 @@
 					</div>
 					<div class="col-md-1"></div>
 				</div><br/>
-			@endif
-			@if($message->getSender->id == \Auth::user()->id)
+			@else
 				<div class="row">
 					<div class="col-md-1"></div>
 					<div class="col-md-10 bg-silver">

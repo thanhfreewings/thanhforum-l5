@@ -18,7 +18,7 @@
 				</span>|<span>{{ $thread->countComment() }} Comments</span>|
 				<span><a href="/thread/update/{{$thread->id}}">update</a></span>|
 				<span><a href="#modal-delete" data-toggle="modal">delete</a></span>
-				<p>{{$thread->content}}[...]</p>
+				<h5>{{$thread->content}}[...]</h5>
 				<br/>
 
 				<!-- #modal-dialog -->
