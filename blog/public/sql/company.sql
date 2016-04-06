@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 05, 2016 at 11:24 PM
+-- Generation Time: Apr 06, 2016 at 06:35 PM
 -- Server version: 5.5.47-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.14
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=56 ;
 
 --
 -- Dumping data for table `message`
@@ -50,6 +50,41 @@ INSERT INTO `message` (`id`, `message`, `created_by`, `receiver_id`, `created_at
 (50, ' A shared lock prevents the selected rows from being modified until your transaction commits:', 10, 24, '2016-04-04 04:19:17', '2016-04-04 04:19:17'),
 (51, 'dfgfdgdfg', 24, 10, '2016-04-04 04:34:43', '2016-04-04 04:34:43'),
 (52, 'I''m fine, thank!', 24, 22, '2016-04-05 15:40:41', '2016-04-05 15:40:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`migration`, `batch`) VALUES
+('2014_10_12_000000_create_users_table', 1),
+('2014_10_12_100000_create_password_resets_table', 1),
+('2016_04_06_025805_create_roles_table', 1),
+('2016_04_06_030055_create_user_roles_table', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE IF NOT EXISTS `password_resets` (
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -88,6 +123,30 @@ INSERT INTO `post` (`id`, `thread_id`, `content`, `created_by`, `created_at`, `u
 (20, 14, 'but an impressive one at a time when Chinaâ€™s internet penetration was barely five percent. ', 1, 1458192266, NULL),
 (24, 16, 'new users of your application. ', 24, 2016, 2016),
 (25, 1, ' but tech-based portals like Housing are helping to change that.', 24, 2016, 2016);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(2, 'Admin', '2016-04-06 01:36:08', '2016-04-06 01:36:08'),
+(7, 'Moderator', '2016-04-06 01:50:55', '2016-04-06 01:50:55'),
+(8, 'Member', '2016-04-06 01:51:04', '2016-04-06 01:51:04'),
+(9, 'User', '2016-04-06 04:19:19', '2016-04-06 04:19:19');
 
 -- --------------------------------------------------------
 
@@ -144,14 +203,45 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `avatar`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', 'uploads/1458117266_user-9.jpg', '1', NULL, '0000-00-00 00:00:00', NULL),
-(10, 'Max', 'max', 'uploads/1457932327_user-7.jpg', '1', NULL, '0000-00-00 00:00:00', NULL),
-(11, 'min', 'min@gmail.com', 'uploads/1457932185_user-2.jpg', '1', NULL, '0000-00-00 00:00:00', NULL),
-(13, 'Min', 'min', 'uploads/1457932441_user-14.jpg', '1', NULL, '0000-00-00 00:00:00', NULL),
-(14, 'Cat', 'cat@gmail.com', 'uploads/user.png', '1', NULL, '0000-00-00 00:00:00', NULL),
-(15, 'qqq', 'qqq', 'uploads/user.png', '1', NULL, '0000-00-00 00:00:00', NULL),
+(1, 'admin', 'admin@gmail.com', 'uploads/1458117266_user-9.jpg', '123456', NULL, '0000-00-00 00:00:00', '2016-04-06 07:11:54'),
+(10, 'Max', 'max@example.com', 'uploads/1457932327_user-7.jpg', '123456', NULL, '0000-00-00 00:00:00', '2016-04-06 07:18:48'),
+(11, 'min', 'min@gmail.com', 'uploads/1457932185_user-2.jpg', '123456', NULL, '0000-00-00 00:00:00', '2016-04-06 07:19:09'),
+(13, 'Min', 'min@example.com', 'uploads/1457932441_user-14.jpg', '123456', NULL, '0000-00-00 00:00:00', '2016-04-06 07:19:33'),
+(14, 'Cat', 'cat@gmail.com', 'uploads/user.png', '123456', NULL, '0000-00-00 00:00:00', '2016-04-06 07:19:41'),
+(15, 'Hot', 'hot@example.com', 'uploads/user.png', '123456', NULL, '0000-00-00 00:00:00', '2016-04-06 07:20:28'),
 (22, 'Test5', '5test@gmail.com', 'uploads/1459136447_user-3.jpg', '123456', 'x1D3obJZpn51d7N3oURhnnbUuxkX391oIR9Ws5sgUzAR035V0uX6p3MFSSgB', '2016-03-24 03:23:27', '2016-03-28 04:18:29'),
-(24, '6Test', '6test@example.com', 'uploads/1459303863_user-5.jpg', '$2y$10$DfmibWdkoaokLceYpIpOqeQWPdSVD4dpImjsJqyhSGj2S6piTkd9W', 'kBQwiFCsVFhbt4qmMUg0iq454filpq3bkrRwv0l58VaehcvVMpzEmN7hDbOS', '2016-03-30 02:01:03', '2016-04-05 14:59:49');
+(24, '6Test', '6test@example.com', 'uploads/1459303863_user-5.jpg', '$2y$10$DfmibWdkoaokLceYpIpOqeQWPdSVD4dpImjsJqyhSGj2S6piTkd9W', 'hFwdk291FC44dqQxAGSh9TRfsiniZEOARpviTH2jm0GQE0GgkmBzuZlaAIR8', '2016-03-30 02:01:03', '2016-04-06 05:14:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_roles`
+--
+
+CREATE TABLE IF NOT EXISTS `user_roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_roles_user_id_foreign` (`user_id`),
+  KEY `user_roles_role_id_foreign` (`role_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `user_roles`
+--
+
+INSERT INTO `user_roles` (`id`, `user_id`, `role_id`, `created_at`, `updated_at`) VALUES
+(2, 1, 2, '2016-04-06 02:55:56', '2016-04-06 02:55:56'),
+(3, 1, 2, '2016-04-06 04:11:56', '2016-04-06 04:11:56'),
+(4, 24, 7, '2016-04-06 04:12:06', '2016-04-06 04:12:06'),
+(5, 10, 8, '2016-04-06 04:12:16', '2016-04-06 04:12:16'),
+(6, 11, 8, '2016-04-06 04:12:32', '2016-04-06 04:12:32'),
+(7, 13, 8, '2016-04-06 04:12:47', '2016-04-06 04:12:47'),
+(8, 22, 8, '2016-04-06 04:12:57', '2016-04-06 04:12:57'),
+(9, 14, 9, '2016-04-06 04:19:41', '2016-04-06 04:19:41');
 
 --
 -- Constraints for dumped tables
@@ -169,6 +259,13 @@ ALTER TABLE `post`
 --
 ALTER TABLE `thread`
   ADD CONSTRAINT `thread_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `user_roles`
+--
+ALTER TABLE `user_roles`
+  ADD CONSTRAINT `user_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
+  ADD CONSTRAINT `user_roles_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

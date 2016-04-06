@@ -48,6 +48,8 @@
 					<li><a href="/message/inbox"><span class="badge badge-danger pull-right">{{ \App\Models\Message::countInbox() }}</span>Inbox</a></li>
 					<li><a href="/message/sent">Sent</a></li>
 					<li><a href="/message/create">Message</a></li>
+					<li><a href="/role">Role</a></li>
+					<li><a href="/member">User</a></li>
 					</li>
 					<li class="dropdown navbar-user">
 						<a href="/javascript:;" class="dropdown-toggle" data-toggle="dropdown">

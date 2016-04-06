@@ -50,7 +50,11 @@ Route::group(['middleware' => ['web','auth']], function () {
 	Route::get('/message/reply/{id}', 'MessageController@getReply');
 	Route::post('/message/reply/{id}', 'MessageController@postReply');
 	Route::post('/comment/create', 'CommentController@postCreate');
+
+	Route::resource('member', 'MemberController');
+	Route::resource('role', 'RoleController');
 });
+
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
