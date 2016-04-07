@@ -32,16 +32,14 @@ class User extends Authenticatable
 		return count($this->threads);
 	}
 
-	public function getRole($id){
-		$userRole = UserRole::where('user_id','=', $id)
-						->first();
-		if(!empty($userRole)){
-			$role = Role::where('id','=',$userRole->role_id)
-						->first();
-			return $role->name;
-		}else{
-			return 'N/A';
+	public function userRole(){
+		return $this->hasOne('App\Models\UserRole','user_id','id');
+	}
+	public function getRole(){
+		if($this->userRole){
+			return $this->userRole->role->name;
 		}
+		return 'N/A';
 	}
 }
 

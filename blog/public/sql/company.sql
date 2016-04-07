@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2016 at 06:35 PM
+-- Generation Time: Apr 07, 2016 at 06:40 PM
 -- Server version: 5.5.47-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.14
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=56 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
 
 --
 -- Dumping data for table `message`
@@ -49,7 +49,8 @@ INSERT INTO `message` (`id`, `message`, `created_by`, `receiver_id`, `created_at
 (49, 'The query builder also includes a few functions to help you do "pessimistic locking" ', 24, 10, '2016-04-04 04:18:30', '2016-04-04 04:18:30'),
 (50, ' A shared lock prevents the selected rows from being modified until your transaction commits:', 10, 24, '2016-04-04 04:19:17', '2016-04-04 04:19:17'),
 (51, 'dfgfdgdfg', 24, 10, '2016-04-04 04:34:43', '2016-04-04 04:34:43'),
-(52, 'I''m fine, thank!', 24, 22, '2016-04-05 15:40:41', '2016-04-05 15:40:41');
+(52, 'I''m fine, thank!', 24, 22, '2016-04-05 15:40:41', '2016-04-05 15:40:41'),
+(53, 'htrjk', 26, 11, '2016-04-07 11:31:57', '2016-04-07 11:31:57');
 
 -- --------------------------------------------------------
 
@@ -145,8 +146,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (2, 'Admin', '2016-04-06 01:36:08', '2016-04-06 01:36:08'),
 (7, 'Moderator', '2016-04-06 01:50:55', '2016-04-06 01:50:55'),
-(8, 'Member', '2016-04-06 01:51:04', '2016-04-06 01:51:04'),
-(9, 'User', '2016-04-06 04:19:19', '2016-04-06 04:19:19');
+(8, 'Member', '2016-04-06 01:51:04', '2016-04-06 01:51:04');
 
 -- --------------------------------------------------------
 
@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `user`
@@ -209,8 +209,11 @@ INSERT INTO `user` (`id`, `name`, `email`, `avatar`, `password`, `remember_token
 (13, 'Min', 'min@example.com', 'uploads/1457932441_user-14.jpg', '123456', NULL, '0000-00-00 00:00:00', '2016-04-06 07:19:33'),
 (14, 'Cat', 'cat@gmail.com', 'uploads/user.png', '123456', NULL, '0000-00-00 00:00:00', '2016-04-06 07:19:41'),
 (15, 'Hot', 'hot@example.com', 'uploads/user.png', '123456', NULL, '0000-00-00 00:00:00', '2016-04-06 07:20:28'),
-(22, 'Test5', '5test@gmail.com', 'uploads/1459136447_user-3.jpg', '123456', 'x1D3obJZpn51d7N3oURhnnbUuxkX391oIR9Ws5sgUzAR035V0uX6p3MFSSgB', '2016-03-24 03:23:27', '2016-03-28 04:18:29'),
-(24, '6Test', '6test@example.com', 'uploads/1459303863_user-5.jpg', '$2y$10$DfmibWdkoaokLceYpIpOqeQWPdSVD4dpImjsJqyhSGj2S6piTkd9W', 'hFwdk291FC44dqQxAGSh9TRfsiniZEOARpviTH2jm0GQE0GgkmBzuZlaAIR8', '2016-03-30 02:01:03', '2016-04-06 05:14:55');
+(22, 'Test5', '5test@gmail.com', 'uploads/1459136447_user-3.jpg', '$2y$10$DfmibWdkoaokLceYpIpOqeQWPdSVD4dpImjsJqyhSGj2S6piTkd9W', 'x1D3obJZpn51d7N3oURhnnbUuxkX391oIR9Ws5sgUzAR035V0uX6p3MFSSgB', '2016-03-24 03:23:27', '2016-03-28 04:18:29'),
+(24, '6Test', '6test@example.com', 'uploads/1459303863_user-5.jpg', '$2y$10$DfmibWdkoaokLceYpIpOqeQWPdSVD4dpImjsJqyhSGj2S6piTkd9W', '0dkLe7Cz9b4gbg0fn4VRwjQDHN9ZhxZe5bvkbu9VjwiPwxh4XxOupf1Kjgox', '2016-03-30 02:01:03', '2016-04-07 11:30:36'),
+(25, '7Test', '7test@example.com', 'uploads/user.png', '$2y$10$/pqmTZ1cxQDk1mHiQ/2H2uTkdPkaUpQsL9jwZLWCMKaFwqmFSxfUi', 'bOoE7056yuOA9K1v3MkutQrjWfaNdoS3nlBSLeWQAU6g3Wk8gTshXvZpiqlT', '2016-04-07 06:54:57', '2016-04-07 11:31:03'),
+(26, '8Test', '8test@example.com', 'uploads/user.png', '$2y$10$BFKNBWsc9IxAZf.IglhSCueEOd8CrXm3LLgyA6vtnqxh0vtk5FYme', 'mLgaQyVw1urjmhFGKVyjHqqoPhj8o2fYtPG7zdj373fr15wruYjGomtY3DGP', '2016-04-07 07:11:28', '2016-04-07 11:33:46'),
+(27, '9Test', '9test@example.com', 'uploads/user.png', '$2y$10$q8RxSBT5IW/Uopmq2VUUDuJh.nrrueYxDHY9rVtMNCnmP9.g9JTZO', '6rvWXXWUpjUcr5o4iaT3lEwMHeH2iUfifeuErRbyVUvtrkmsN9DCfShXfzhn', '2016-04-07 11:34:18', '2016-04-07 11:34:29');
 
 -- --------------------------------------------------------
 
@@ -227,21 +230,24 @@ CREATE TABLE IF NOT EXISTS `user_roles` (
   PRIMARY KEY (`id`),
   KEY `user_roles_user_id_foreign` (`user_id`),
   KEY `user_roles_role_id_foreign` (`role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `user_roles`
 --
 
 INSERT INTO `user_roles` (`id`, `user_id`, `role_id`, `created_at`, `updated_at`) VALUES
-(2, 1, 2, '2016-04-06 02:55:56', '2016-04-06 02:55:56'),
+(2, 1, 7, '2016-04-06 02:55:56', '2016-04-06 20:25:26'),
 (3, 1, 2, '2016-04-06 04:11:56', '2016-04-06 04:11:56'),
-(4, 24, 7, '2016-04-06 04:12:06', '2016-04-06 04:12:06'),
-(5, 10, 8, '2016-04-06 04:12:16', '2016-04-06 04:12:16'),
+(4, 24, 2, '2016-04-06 04:12:06', '2016-04-06 23:55:43'),
+(5, 10, 2, '2016-04-06 04:12:16', '2016-04-06 20:25:42'),
 (6, 11, 8, '2016-04-06 04:12:32', '2016-04-06 04:12:32'),
 (7, 13, 8, '2016-04-06 04:12:47', '2016-04-06 04:12:47'),
 (8, 22, 8, '2016-04-06 04:12:57', '2016-04-06 04:12:57'),
-(9, 14, 9, '2016-04-06 04:19:41', '2016-04-06 04:19:41');
+(9, 14, 8, '2016-04-06 04:19:41', '2016-04-07 04:37:21'),
+(10, 1, 7, '2016-04-06 20:10:24', '2016-04-06 20:10:24'),
+(11, 25, 7, '2016-04-07 00:11:54', '2016-04-07 00:11:54'),
+(12, 26, 8, '2016-04-07 00:12:21', '2016-04-07 00:12:21');
 
 --
 -- Constraints for dumped tables

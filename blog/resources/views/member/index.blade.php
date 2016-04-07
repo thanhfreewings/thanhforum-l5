@@ -21,9 +21,9 @@
 	        </td>
 	        <td>{{ $user->name }}</td>
 	        <td>{{ $user->email }}</td>
-	        <td>{{ $user->getRole($user->id) }}</td>
+	        <td>{{ $user->getRole() }}</td>
 	        <td>{{ $user->created_at }}</td>
-	        <td><a href="/member/{{$user->id}}/edit" class="btn btn-success btn-sm pull-right">Edit</a></td>
+	        <td><a href="/member/{{$user->id}}/edit" class="btn btn-success btn-sm pull-right">Role edit</a></td>
 		</tr>
 	@endforeach
     </table>

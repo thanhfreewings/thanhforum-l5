@@ -48,8 +48,13 @@
 					<li><a href="/message/inbox"><span class="badge badge-danger pull-right">{{ \App\Models\Message::countInbox() }}</span>Inbox</a></li>
 					<li><a href="/message/sent">Sent</a></li>
 					<li><a href="/message/create">Message</a></li>
-					<li><a href="/role">Role</a></li>
-					<li><a href="/member">User</a></li>
+					@if(\Auth::user()->getRole() == 'Admin')
+						<li><a href="/role">Role</a></li>
+					@endif
+					@if(\Auth::user()->getRole() == 'Admin' ||
+						\Auth::user()->getRole() == 'Moderator')
+						<li><a href="/member">User</a></li>
+					@endif
 					</li>
 					<li class="dropdown navbar-user">
 						<a href="/javascript:;" class="dropdown-toggle" data-toggle="dropdown">
@@ -74,6 +79,7 @@
 			@yield('content')
 		</div>
 	</div>
+
 	<script src="/assets/plugins/pace/pace.min.js"></script>
 	<script src="/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
 	<script src="/assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>

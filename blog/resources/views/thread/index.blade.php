@@ -12,22 +12,25 @@
 		@foreach ($threads as $key => $thread)
 		<li>
 			<div class="media">
-				<img src="/{{$thread->avatar}}" class="img-thumbnail">
-				<a href="/user/view/{{$thread->userId}}"><h6>{{ $thread->name }}</h6></a>
+				<a href="/user/view/{{$thread->userId}}"><img src="/{{$thread->avatar}}"></a>
+				<h6><b>{{ $thread->getUser->getRole() }}</b></h6>
 			</div>
 			<div class="info-container">
 
 				<div class="info">
 					<h4 class="title"><a href="/thread/view/{{$thread->id}}">{{$thread->title}}</a></h4>
 					<p class="desc">
-						<span>Created {{$thread->created_at}}</span>
+						<span>Poster by <a href="/user/view/{{$thread->userId}}">{{$thread->name}}</a></span>|
+						<span>At {{$thread->created_at}}</span>
 						@if(!empty($thread->updated_at))
 						|<span class=""> updated {{ $thread->updated_at }}</span>
 						@endif
-						<br/><span>{{substr($thread->content, 0,500)}}</span>
-						@if(strlen($thread->content) > 500)
-						<span>[...]</span>
-						@endif
+						<h5>
+							{{substr($thread->content, 0,300)}}
+							@if(strlen($thread->content) > 300)
+							[...]
+							@endif
+						</h5>
 						<br>
 					</p>
 				</div>

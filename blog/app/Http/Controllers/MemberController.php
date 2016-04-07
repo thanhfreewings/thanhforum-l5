@@ -10,6 +10,9 @@ use App\Models\UserRole;
 
 class MemberController extends Controller
 {
+    public function __construct(){
+        $this->middleware('moderator');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +42,14 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        UserRole::create($request->all());
+        $userRole = UserRole::where('user_id',$request->get('user_id'))->first();
+        if($userRole){
+            $userRole->role_id = $request->get('role_id');
+            $userRole->save();
+        }
+        else{
+            UserRole::create($request->all());
+        }
         return redirect('member');
     }
 

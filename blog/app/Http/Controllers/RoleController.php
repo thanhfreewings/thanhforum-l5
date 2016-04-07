@@ -7,9 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Models\Role;
+use App\Models\UserRole;
 
 class RoleController extends Controller
 {
+    public function __construct(){
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -71,7 +75,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::find($id);
+        return view('role.edit',compact('role'));
     }
 
     /**
@@ -97,8 +102,13 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $role = Role::find($id);
-        $role->delete();
-        return redirect('role'); 
+        $userRoles = UserRole::where('role_id','=',$id)->get();
+        if(!empty($userRoles)){
+            return redirect('role')->with('error', 'Can not to delete role...!');
+        }else{
+            $role = Role::find($id);
+            $role->delete();
+            return redirect('role'); 
+        }
     }
 }
