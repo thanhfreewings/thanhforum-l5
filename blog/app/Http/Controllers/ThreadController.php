@@ -8,7 +8,18 @@ use App\Models\Comment;
 
 class ThreadController extends Controller
 {
-    
+
+    public function __construct(){
+    	$this->middleware('member', ['only' => ['getCreate', 'postCreate']]);
+    	$this->middleware('moderator', ['only' => ['allThreads']]);
+    }
+
+    public function allThreads(){
+    	$threads = Thread::all()
+    					->orderBy('id', 'desc')
+    					->get();
+    	return \View::make('thread.all',compact('threads'));
+    }
     public function index()
     {
         $threads = Thread::join('user', 'thread.created_by', '=', 'user.id')
@@ -44,6 +55,7 @@ class ThreadController extends Controller
 		return redirect('/thread/view/'.$inputs['']);
     }
     public function getCreate(){
+
     	return \View::make('thread.create');
     }
 

@@ -39,7 +39,7 @@ class User extends Authenticatable
 		if($this->userRole){
 			return $this->userRole->role->name;
 		}
-		return 'N/A';
+		return 'User';
 	}
 }
 

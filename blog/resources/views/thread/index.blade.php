@@ -35,7 +35,10 @@
 					</p>
 				</div>
 				<div class="total-count">
-					<span class="text-center">{{$thread->countComment()}} Comments</span>
+					<div class="col-md-9 pull-right">
+						<span class="pull-left">{{$thread->countComment()}} Comments</span><br/>
+						<span class="pull-left">{{$thread->countLikes()}} Likes</span>
+					</div>
 				</div>
 				<div class="latest-post">
 					<span>Recent replies</span>

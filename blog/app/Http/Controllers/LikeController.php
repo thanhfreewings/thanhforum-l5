@@ -3,16 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Models\User;
-use App\Models\Role;
-use App\Models\UserRole;
 
-class MemberController extends Controller
+use App\Http\Requests;
+use App\Models\Like;
+
+class LikeController extends Controller
 {
-    public function __construct(){
-        $this->middleware('moderator');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +16,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('member.index',compact('users'));
+        //
     }
 
     /**
@@ -31,7 +26,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return view('member.create');
+        //
     }
 
     /**
@@ -42,22 +37,14 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array('role_id' => 'required');
-        $validator = \Validator::make($request->all(),$rules);
-        if($validator->fails()){
-            return back()->withErrors($validator);
+        $like = Like::where('created_by',$request->get('created_by'))
+                    ->first();
+        if($like){
+            $like->delete();
+        }else{
+            Like::create($request->all());
         }
-
-        $userRole = UserRole::where('user_id',$request->get('user_id'))
-                            ->first();
-        if($userRole){
-            $userRole->role_id = $request->get('role_id');
-            $userRole->save();
-        }
-        else{
-            UserRole::create($request->all());
-        }
-        return redirect('member');
+        return \Redirect::back();
     }
 
     /**
@@ -68,8 +55,7 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('member.view',compact('user'));
+        //
     }
 
     /**
@@ -80,9 +66,7 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        $roles = Role::all();
-        return view('member.edit',compact('user','roles'));
+        //
     }
 
     /**
@@ -94,10 +78,7 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = UserRole::find($id);
-        $role->fill($request->all());
-        $role->save();
-        return redirect('member');
+        //
     }
 
     /**
@@ -108,8 +89,6 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-        return redirect('member');   
+        //
     }
 }

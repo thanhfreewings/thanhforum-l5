@@ -16,6 +16,19 @@
 						@if(!empty($thread->image))
 							<img src="/{{ $thread->image }}" class="img-responsive"><br/><br/>
 						@endif
+						<h4>
+							<form method="POST" action="/like" id="this_form">
+								<input type="hidden" name="_token" value="{{csrf_token()}}" />
+								<input type="hidden" name="created_by" value="{{\Auth::user()->id}}" />
+								<input type="hidden" name="thread_id" value="{{$thread->id}}" />
+								@if($thread->getLike() == true)
+								<a href="javascript:;" class="fa fa-heart" onclick="document.getElementById('this_form').submit();"> likes</a>
+								@else
+								<a href="javascript:;" class="fa fa-heart-o" onclick="document.getElementById('this_form').submit();"> likes</a>
+								@endif
+								<label> ({{$thread->countLikes()}})</label>
+							</form>
+						</h4>
 						<div class="post-time">
 							<span>Poster <a href="/user/view/{{$thread->getUser->id}}">{{ $thread->getUser->name }} </a></span>|
 							<span>at {{ $thread->created_at }}</span>
@@ -39,7 +52,7 @@
 									<input type="hidden" name="_token" value="{{csrf_token()}}"></input>
 									<input type="hidden" name="thread_id" value="{{ $thread->id }}">
 									@if($errors->has('content'))
-									<span class="text-danger">{{$errors->first('content')}}</span>
+										<span class="text-danger">{{$errors->first('content')}}</span>
 									@endif
 									<textarea class="textarea form-control" name="content" placeholder="Enter text ..." rows="10"></textarea>
 									<div class="m-t-10">
