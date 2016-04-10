@@ -6,22 +6,33 @@
 	<div class="col-sm-9">
 		@if(!empty($threads))
 			@foreach ($threads as $thread)
-				<h4><a href="/thread/view/{{$thread->id}}">{{$thread->title}}</a></h4>
-				@if(!empty($thread->getUser->image))
-					<img src="/{{ $thread->getUser->image }}" class="img-responsive"><br/><br/>
+				<h3><a href="/thread/view/{{$thread->id}}">{{$thread->title}}</a></h3>
+				@if(!empty($thread->image))
+					<img src="/{{ $thread->image }}" class="img-responsive"><br/>
 				@endif
-				<span>At {{$thread->created_at}}</span>
+
+
+				<form method="POST" action="/thread/visible/{{$thread->id}}">
+					<input type="hidden" name="_token" value="{{csrf_token()}}" />
+					@if($thread->visible == false)
+						<button type="submit" class="btn btn-success">hide</button>	
+					@else
+						<button type="submit" class="btn btn-success">unhide</button>	
+					@endif
+
+				</form>
+
+				<br/><a href="#modal-delete" data-toggle="modal" class="btn btn-success"> delete</a>	</br></br>
+				<span>Poster by <b>{{$thread->getUser->name}}</b> At {{$thread->created_at}}</span>
 				<span>
 					@if(!empty($thread->updated_at))
 						|<span>updated {{$thread->updated_at}}</span>
 					@endif
 				</span>|
 				<span>{{ $thread->countComment() }} Comments</span>|
-				<span>{{ $thread->countLikes() }} Likes</span>|
-				<span><a href="/thread/update/{{$thread->id}}">update</a></span>|
-				<span><a href="#modal-delete" data-toggle="modal">delete</a></span>
+				<span>{{ $thread->countLikes() }} Likes</span>
 				<h5>{{$thread->content}}[...]</h5>
-				<br/>
+				<br/><hr/>
 
 				<!-- #modal-dialog -->
 				<div class="modal fade" id="modal-delete">
@@ -45,7 +56,7 @@
 
 			@endforeach
 		@else
-			<li><h2>do not have a thread...</h2></li>
+			<h3>do not have a thread...</h3>
 		@endif
 	</div>
 </div>

@@ -27,4 +27,9 @@ class CommentController extends Controller
 		$comment->save();
 		return redirect('/thread/view/'.$inputs['thread_id']);
     }
+    public function postDelete($id){
+        $comment = Comment::find($id);
+        $comment->delete();
+        return back();
+    }
 }

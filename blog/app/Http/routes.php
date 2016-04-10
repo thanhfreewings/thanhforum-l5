@@ -44,6 +44,7 @@ Route::group(['middleware' => ['web','auth']], function () {
 	Route::post('/thread/update/{id}', 'ThreadController@postUpdate');
 	Route::get('/thread/view/{id}', 'ThreadController@getView');
 	Route::get('/thread/all', 'ThreadController@allThreads');
+	Route::post('/thread/visible/{id}', 'ThreadController@visibleThread');
 
 	Route::get('/message/inbox', 'MessageController@inbox');
 	Route::get('/message/inbox/delete/{id}', 'MessageController@inboxDelete');
@@ -55,6 +56,7 @@ Route::group(['middleware' => ['web','auth']], function () {
 	Route::post('/message/reply/{id}', 'MessageController@postReply');
 
 	Route::post('/comment/create', 'CommentController@postCreate');
+	Route::get('/comment/delete/{id}', 'CommentController@postDelete');
 
 	Route::resource('member', 'MemberController');
 	Route::resource('role', 'RoleController');

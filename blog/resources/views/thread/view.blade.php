@@ -72,7 +72,39 @@
 							<span class="label label-inverse">{{$comment->user->name}}</span>
 						</div>
 						<div class="info-container">
-							<div class="post-user"><a href="/user/view/{{$comment->user->id}}">{{ $comment->user->name }}</a><small>SAYS</small></div>
+							<div class="post-user">
+								<a href="/user/view/{{$comment->user->id}}">{{ $comment->user->name }}</a>
+								<small>SAYS</small>
+								
+
+								@if(\Auth::user()->getRole() == 'Admin' ||
+									\Auth::user()->getRole() == 'Moderator')
+									<label class="pull-right">
+										<a href="#modal-delete" data-toggle="modal">Delete</a>
+									</label>
+								@endif
+								<!-- #modal-dialog -->
+								<div class="modal fade" id="modal-delete">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+												<h4 class="modal-title">Delete comment</h4>
+											</div>
+											<div class="modal-body">
+												You want to delete comment...?
+											</div>
+											<div class="modal-footer">
+												<button class="btn btn-sm btn-white" data-dismiss="modal">Close</button>
+												<a href="/comment/delete/{{$comment->id}}" class="btn btn-sm btn-warning">Delete</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--end #modal-dialog -->
+
+
+							</div>
 							<div class="post-content">
 								{{$comment->content}}
 							</div>

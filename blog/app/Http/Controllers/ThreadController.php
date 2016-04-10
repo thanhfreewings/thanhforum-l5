@@ -11,15 +11,9 @@ class ThreadController extends Controller
 
     public function __construct(){
     	$this->middleware('member', ['only' => ['getCreate', 'postCreate']]);
-    	$this->middleware('moderator', ['only' => ['allThreads']]);
+    	$this->middleware('moderator', ['only' => ['allThreads', 'visibleThread']]);
     }
 
-    public function allThreads(){
-    	$threads = Thread::all()
-    					->orderBy('id', 'desc')
-    					->get();
-    	return \View::make('thread.all',compact('threads'));
-    }
     public function index()
     {
         $threads = Thread::join('user', 'thread.created_by', '=', 'user.id')
@@ -118,10 +112,26 @@ class ThreadController extends Controller
     		$thread->image = 'uploads/'.$name;
     	}
     	$thread->save();
-    	return redirect('/thread/created');
+        return back();
     }
     public function delete($id){
     	Thread::where('id', '=', $id)->delete();
     	return redirect('/thread/created');
+    }
+    public function allThreads(){
+        $threads = Thread::orderBy('thread.id','desc')
+                        ->get();
+        return \View::make('thread.all',compact('threads'));
+    }
+    public function visibleThread($id){
+        $inputs = \Input::all();
+        $thread = Thread::find($id);
+        if($thread->visible == false){
+            $thread->visible = true;
+        }else{
+            $thread->visible = false;
+        }
+        $thread->save();
+        return back();
     }
 }

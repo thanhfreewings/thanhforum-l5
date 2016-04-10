@@ -6,7 +6,7 @@
 	<div class="col-sm-9">
 		@if(!empty($threads))
 			@foreach ($threads as $thread)
-				<h4><a href="/thread/view/{{$thread->id}}">{{$thread->title}}</a></h4>
+				<h3><a href="/thread/view/{{$thread->id}}">{{$thread->title}}</a></h3>
 				@if(!empty($thread->image))
 					<img src="/{{ $thread->image }}" class="img-responsive"><br/><br/>
 				@endif
@@ -49,7 +49,8 @@
 		@endif
 	</div>
 	<div class="col-sm-3">
-		<br/><br/><p class="text-right"><a href="/thread/create" class="btn btn-success m-r-5 m-b-5">+ Compose</a></p>
+		<br/><br/><br/>
+		<p class="text-right"><a href="/thread/create" class="btn btn-success m-r-5 m-b-5">+ Compose</a></p>
 	</div>
 </div>
 @endsection

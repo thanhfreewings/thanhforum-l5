@@ -54,6 +54,7 @@
 					@if(\Auth::user()->getRole() == 'Admin' ||
 						\Auth::user()->getRole() == 'Moderator')
 						<li><a href="/member">User</a></li>
+						<li><a href="/thread/all">All threads</a></li>
 					@endif
 					</li>
 					<li class="dropdown navbar-user">
@@ -64,7 +65,7 @@
 						<ul class="dropdown-menu animated fadeInLeft">
 							<li class="arrow"></li>
 							<li><a href="/user/edit">Edit Profile</a></li>
-							<li><a href="/thread/created">Thread created</a></li>
+							<li><a href="/thread/created">Threads created</a></li>
 							<li class="divider"></li>
 							<li><a href="/logout">Log Out</a></li>
 						</ul>
