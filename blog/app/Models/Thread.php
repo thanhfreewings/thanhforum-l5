@@ -33,7 +33,7 @@ class Thread extends Model
 	public function countLikes(){
 		return count($this->likes);
 	}
-	public function getUser(){
+	public function user(){
 		return $this->belongsTo('App\Models\User','created_by','id');
 	}   
 	public function filterUser(){

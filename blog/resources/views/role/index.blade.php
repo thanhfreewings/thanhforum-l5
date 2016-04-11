@@ -13,14 +13,14 @@
 		</th>
 		<th></th>
 		<th></th>
-		<th></th>
+		<!-- <th></th> -->
 		<th><a href="/role/create" class="pull-right"><h5>New role</h5></a></th>
 	</tr>
 	<tr class="active">
 		<th>Name</th>
 		<th>Created at</th>
 		<th>Updated at</th>
-		<th></th>
+		<!-- <th></th> -->
 		<th></th>
 	</tr>
 	@foreach ($roles as $key => $role)
@@ -32,7 +32,7 @@
 				{{$role->updated_at}}
 			@endif
 		</td>
-		<td><a href="/role/{{$role->id}}/edit" class="btn btn-success btn-xs pull-right">Edit</a></td>
+		<!-- <td><a href="/role/{{$role->id}}/edit" class="btn btn-success btn-xs pull-right">Edit</a></td> -->
 		<td>
 			<form action="/role/{{$role->id}}" method="POST">
 				{!!csrf_field()!!}

@@ -5,11 +5,19 @@
 <div class="content">
 	<div class="container">
 		<div class="col-md-11">
+
+
 			<ul class="forum-list forum-detail-list">
 				<li>
 					<div class="media">
-						<a href="/user/view/{{$thread->getUser->id}}"><img src="/{{ $thread->getUser->avatar }}" ></a>
-						<span class="label label-inverse">{{ $thread->getUser->name }}</span>
+						<a href="/user/view/{{$thread->user->id}}"><img src="/{{ $thread->user->avatar }}" ></a>
+						@if($thread->user->getRole() == 'Admin')
+							<span class="label label-danger">{{ $thread->user->getRole() }}</span>
+						@elseif($thread->user->getRole() == 'Moderator')
+							<span class="label label-primary"><small>{{ $thread->user->getRole() }}</small></span>
+						@else
+							<span class="label label-inverse">{{ $thread->user->getRole() }}</span>
+						@endif
 					</div>
 					<div class="info-container">
 						<div class="post-user"><small><?php echo $thread->title ?></small></div>
@@ -30,7 +38,7 @@
 							</form>
 						</h4>
 						<div class="post-time">
-							<span>Poster <a href="/user/view/{{$thread->getUser->id}}">{{ $thread->getUser->name }} </a></span>|
+							<span>Poster <a href="/user/view/{{$thread->user->id}}">{{ $thread->user->name }} </a></span>|
 							<span>at {{ $thread->created_at }}</span>
 							@if(!empty($thread->updated_at))
 								| <span>update at {{$thread->updated_at}}</span>
@@ -69,7 +77,13 @@
 					<li>
 						<div class="media">
 							<a href="/user/view/{{$comment->user->id}}"><img src="/{{$comment->user->avatar}}" ></a>
-							<span class="label label-inverse">{{$comment->user->name}}</span>
+							@if($comment->user->getRole() == 'Admin')
+								<span class="label label-danger">{{ $comment->user->getRole() }}</span>
+							@elseif($comment->user->getRole() == 'Moderator')
+								<span class="label label-primary"><small>{{ $comment->user->getRole() }}</small></span>
+							@else
+								<span class="label label-inverse">{{ $comment->user->getRole() }}</span>
+							@endif
 						</div>
 						<div class="info-container">
 							<div class="post-user">
@@ -113,6 +127,8 @@
 					</li>
 				@endforeach
 			</ul>
+
+
 		</div>
 	</div>
 </div>

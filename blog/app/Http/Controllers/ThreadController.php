@@ -27,7 +27,11 @@ class ThreadController extends Controller
     }
 
     public function getView($id){
+        $role = \Auth::user()->getRole();
         $thread = Thread::find($id);
+        if($thread->visible == true && $role != 'Admin' && $role != 'Moderator'){
+        	return view('errors.503');
+        }
         return \View::make('thread.view',compact('thread'));
     }
     public function postComment(){
@@ -112,11 +116,11 @@ class ThreadController extends Controller
     		$thread->image = 'uploads/'.$name;
     	}
     	$thread->save();
-        return back();
+        return $this->created();
     }
     public function delete($id){
-    	Thread::where('id', '=', $id)->delete();
-    	return redirect('/thread/created');
+    	$thread = Thread::find($id)->delete();
+    	return back();
     }
     public function allThreads(){
         $threads = Thread::orderBy('thread.id','desc')

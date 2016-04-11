@@ -10,17 +10,19 @@
 	<ul class="forum-list">
 
 		@foreach ($threads as $key => $thread)
+		@if($thread->visible == false)
+		
 		<li>
 			<div class="media">
 				<a href="/user/view/{{$thread->userId}}"><img src="/{{$thread->avatar}}"></a>
-				<h6><b>{{ $thread->getUser->getRole() }}</b></h6>
+				<h6><b>{{ $thread->user->getRole() }}</b></h6>
 			</div>
 			<div class="info-container">
 
 				<div class="info">
 					<h4 class="title"><a href="/thread/view/{{$thread->id}}">{{$thread->title}}</a></h4>
 					<p class="desc">
-						<span>Poster by <a href="/user/view/{{$thread->userId}}">{{$thread->name}}</a></span>|
+						<span>Posted by <a href="/user/view/{{$thread->userId}}">{{$thread->name}}</a></span>|
 						<span>At {{$thread->created_at}}</span>
 						@if(!empty($thread->updated_at))
 						|<span class=""> updated {{ $thread->updated_at }}</span>
@@ -55,6 +57,8 @@
 				</div>
 			</div>
 		</li>
+		
+		@endif
 		@endforeach
 
 	</ul>
