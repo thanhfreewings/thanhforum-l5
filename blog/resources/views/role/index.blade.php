@@ -5,17 +5,10 @@
 
 
 <table class="table">
-	<tr>
-		<th>
-			@if (session('error'))
-			    <p class="text-danger">{{ session('error') }}</p>
-			@endif
-		</th>
-		<th></th>
-		<th></th>
-		<!-- <th></th> -->
-		<th><a href="/role/create" class="pull-right"><h5>New role</h5></a></th>
-	</tr>
+	@if (session('error'))
+	    <label class="text-danger">{{ session('error') }}</label>
+	@endif
+	<a href="/role/create" class="btn btn-success pull-right m-b-10">New role</a>
 	<tr class="active">
 		<th>Name</th>
 		<th>Created at</th>
