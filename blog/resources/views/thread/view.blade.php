@@ -25,6 +25,7 @@
 							<img src="/{{ $thread->image }}" class="img-responsive"><br/><br/>
 						@endif
 						<h4>
+
 							<form method="POST" action="/like" id="this_form">
 								<input type="hidden" name="_token" value="{{csrf_token()}}" />
 								<input type="hidden" name="created_by" value="{{\Auth::user()->id}}" />
@@ -36,6 +37,7 @@
 								@endif
 								<label> ({{$thread->countLikes()}})</label>
 							</form>
+							
 						</h4>
 						<div class="post-time">
 							<span>Poster <a href="/user/view/{{$thread->user->id}}">{{ $thread->user->name }} </a></span>|
